@@ -5841,7 +5841,6 @@ body header {
 }
 
 body header a {
-  color: #fff;
   text-decoration: none;
   display: block;
   text-transform: uppercase;
@@ -5881,9 +5880,7 @@ body .modal-overlay {
   background: #637079cb;
   z-index: 9999;
   -webkit-animation-name: example;
-  /* Safari 4.0 - 8.0 */
   -webkit-animation-duration: 0.5s;
-  /* Safari 4.0 - 8.0 */
   animation-name: example;
   animation-duration: 0.5s;
 }

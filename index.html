@@ -7,49 +7,51 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Jet2 Tech Test</title>
     <link rel="stylesheet" href="css/main.css">
-
 </head>
 
 <body>
+
     <header>
-        <a href="#">
-            <img src="images\Jet2Holidays Logo.png" class="logo" />
+        <a>
+            <img src="images\Jet2Holidays Logo.png" class="logo" alt="Logo"/>
         </a>
     </header>
+
     <main>
         <section id="primary">
             <h1>
                 Tech Test
             </h1>
-            <button class="btn btn--light-blue" onclick="openModal('Congratulations your jet2 holiday booking has been confirmed',
+            <button class="btn btn--light-blue" alt="Confirmation Button"
+                onclick="openModal('Congratulations your jet2 holiday booking has been confirmed',
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis dolore ratione perferendis ipsam, exercitationem beatae, nemo, voluptates veritatis consequuntur molestiae fugit aliquid mollitia a blanditiis numquam possimus in atque cumque.')">
-                Click me to fly away!
+                Confirm your booking!
             </button>
 
+            <!-- Create Modal and hide it until needed. Give ability to re-use modal by using javascript to pass header text and content as arguments. -->
             <div class="is-hidden modal-overlay">
 
                 <div id="modal__test" class="modal">
 
                     <div class="modal__header">
-                        <div class="modal__header-icon fas fa-check-circle"></div>
+                        <div class="modal__header-icon fas fa-check-circle" alt="Confirmation Icon"></div>
                         <div id="modal__header-text" class="modal__header-text"></div>
                     </div>
                     <div id="modal__content" class="modal__content">
                     </div>
                     <div class="modal__footer">
-                        <button class="btn btn--cancel">Cancel</button>
+                        <button class="btn btn--cancel" alt="Cancel Button">Cancel</button>
                         <button id="btn__continue" class="btn btn--continue"
-                            onclick="updateModal('Thank You!','We hope you enjoy your jet2 holiday!')">Continue</button>
+                            onclick="updateModal('Thank You!','We hope you enjoy your jet2 holiday!')" alt="Continue Button">Continue</button>
                     </div>
 
                 </div>
             </div>
         </section>
-
     </main>
 
     <script>
- 
+
         class Modal {
             constructor(overlay) {
                 this.overlay = overlay;
@@ -63,7 +65,6 @@
                 var elem = document.querySelector('#btn__continue');
                 elem.style.display = 'inline-block';
             }
-
             update(header, content) {
                 this.overlay.classList.remove('is-hidden');
                 this.overlay.querySelector('#modal__header-text').innerHTML = header;
@@ -71,7 +72,6 @@
                 var elem = document.querySelector('#btn__continue');
                 elem.style.display = 'none';
             }
-
             close() {
                 this.overlay.classList.add('is-hidden');
             }

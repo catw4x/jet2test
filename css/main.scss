@@ -1,3 +1,6 @@
+
+//Set up colours here so if any changes are needed we only have to do it in one place. 
+
 $colors: (
     primary: #ee3123,
     accent: #FFFF00,
@@ -9,13 +12,16 @@ $colors: (
 
 $padding: 10px;
 
+//Import fontawesome icons as we can colour and size svg where needed and improve performance over normal images.
+
 @import "scss/fontawesome.scss";
 @import "scss/solid.scss";
-
 
 @function color($color-name) {
     @return map-get($colors, $color-name)
 };
+
+//Import Franklin Gothic fonts to use in buttons and headers.
 
 @font-face {
     font-family: 'Franklin Gothic Demi';
@@ -27,6 +33,7 @@ $padding: 10px;
     src: url('fonts/FranklinGothic-HeavyItalic.woff') format('woff');
 };
 
+//Set responsive trigger to change page layout from mobile to desktop.
 $desktop: 840px;
 
 @mixin desktop {
@@ -34,6 +41,7 @@ $desktop: 840px;
         @content;
     }
 }
+
 body, html {
     height: 100%;
 }
@@ -54,8 +62,7 @@ body {
     }
 
     header a {
-        
-        color: #fff;
+ 
         text-decoration: none;
         display: block;
         text-transform: uppercase;
@@ -90,9 +97,8 @@ body {
         height: 100%;
         background: #637079cb;
         z-index: 9999;
-
-        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
-        -webkit-animation-duration: 0.5s; /* Safari 4.0 - 8.0 */
+        -webkit-animation-name: example; 
+        -webkit-animation-duration: 0.5s; 
         animation-name: example;
         animation-duration: 0.5s;
 
@@ -106,7 +112,7 @@ body {
             100% {opacity: 1;}
           }
     }
-    
+
     .modal {
         max-height: calc(100% - 100px);
         position: absolute;
@@ -156,10 +162,8 @@ body {
             text-align: left;
             padding: 20px;
 
-
             @include desktop {
                 padding: 20px 60px 40px 60px;
-                
             }
         }
 
