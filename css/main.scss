@@ -1,0 +1,265 @@
+$colors: (
+    primary: #ee3123,
+    accent: #FFFF00,
+    lightblue: #347cf2,
+    darkblue: #203240,
+    green: #009401,
+    darkgrey: #637079
+);
+
+$padding: 10px;
+
+@import "scss/fontawesome.scss";
+@import "scss/solid.scss";
+
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+};
+
+@font-face {
+    font-family: 'Franklin Gothic Demi';
+    src: url('fonts/FranklinGothic-Demi.woff') format('woff');
+};
+
+@font-face {
+    font-family: 'Franklin Gothic Heavy Italic';
+    src: url('fonts/FranklinGothic-HeavyItalic.woff') format('woff');
+};
+
+$desktop: 840px;
+
+@mixin desktop {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }
+}
+body, html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;  
+
+    .is-hidden {
+        display: none;
+      }
+     
+    header {
+        background-color: #fff;
+        @include desktop {
+            padding: 16px 0;
+        }
+    }
+
+    header a {
+        
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        text-transform: uppercase;
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+        padding: 12px 0;
+
+        @include desktop {
+            height: 100px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1.6%;
+        }
+
+        .logo {
+            width: 200px;
+            @include desktop {
+                width: 360px;
+                height: 91px;
+            }
+        }
+
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #637079cb;
+        z-index: 9999;
+
+        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 0.5s; /* Safari 4.0 - 8.0 */
+        animation-name: example;
+        animation-duration: 0.5s;
+
+        @-webkit-keyframes example {
+            0%   {opacity: 0;}
+            100% {opacity: 1;}
+          }
+          
+          @keyframes example {
+            0%   {opacity: 0;}
+            100% {opacity: 1;}
+          }
+    }
+    
+    .modal {
+        max-height: calc(100% - 100px);
+        position: absolute;
+        bottom: 0;
+        margin: auto;
+        background: #f5f5f5;
+        z-index: 9999;
+        overflow: auto;
+        width: 100%;
+
+        @include desktop {
+            margin: auto;
+            position: relative;
+            top: 30%;
+            width: 700px;
+            max-width: 700px;
+            min-height: 300px;
+        }
+
+        .modal__header {
+            font-size: 24px;
+            color: color(darkblue);
+            text-align: left;
+            padding: 20px 20px 0 20px;
+            
+            @include desktop {
+                padding: 50px 60px 0 60px;
+            }
+
+            .modal__header-icon {
+                color: color(green);
+                float: left;
+                font-size: 24px;
+            }
+
+            .modal__header-text {
+                margin-left: 36px;
+                font-family: "Franklin Gothic Demi", Arial, sans-serif;
+                font-style: normal;
+            }
+        }
+
+        .modal__content {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: left;
+            padding: 20px;
+
+
+            @include desktop {
+                padding: 20px 60px 40px 60px;
+                
+            }
+        }
+
+        .modal__footer {
+            padding: 10px 20px 20px;
+            border-top: 1px solid #ccc;
+
+            @include desktop {
+                padding: 10px 0 20px 0;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+            }
+        }
+    }
+    
+    .btn {
+        border: 2px solid;
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        position: relative;
+        background-color: transparent;
+        outline: 0;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .btn--light-blue {
+        padding: 5px 0;
+        background: color(lightblue);
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        height: 60px;
+        font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
+        font-size: 22px;
+        letter-spacing: -0.6px;
+        cursor: pointer;
+        width: 100%;
+        line-height: 20px;
+
+        @include desktop {
+            display: inline-block;
+            width: 400px;
+        }
+    }
+
+    .btn--cancel {
+        display: inline-block;
+        width: 100%;
+        height: 50px;
+        cursor: pointer;
+        font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
+        font-size: 22px;
+        border: 2px solid color(darkgrey);
+        color: color(darkgrey);
+        margin-top: 10px;
+        letter-spacing: -0.6px;
+
+        @include desktop {
+            width: 250px;
+        }
+    }
+
+    .btn--continue {
+        display: inline-block;
+        width: 100%;
+        height: 50px;
+        cursor: pointer;
+        font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
+        font-size: 22px;
+        border: 2px solid color(darkblue);
+        background: color(darkblue);
+        color: #fff;
+        margin-top: 10px;
+        letter-spacing: -0.6px;
+
+        @include desktop {
+            width: 250px;
+        }
+
+    }
+
+    section#primary {
+        padding: $padding;
+        text-align: center;
+        
+        h1 {
+            font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
+            font-size: 24px;
+            letter-spacing: -0.6px;
+            color: color(darkblue);
+            -webkit-font-smoothing: antialiased;
+            font-weight: 500;
+            outline: 0;
+        }
+    }
+}
