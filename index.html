@@ -13,7 +13,7 @@
 
     <header>
         <a>
-            <img src="images\Jet2Holidays Logo.png" class="logo" alt="Logo"/>
+            <img src="images\Jet2Holidays Logo.png" class="logo" alt="Logo" />
         </a>
     </header>
 
@@ -42,7 +42,8 @@
                     <div class="modal__footer">
                         <button class="btn btn--cancel" alt="Cancel Button">Cancel</button>
                         <button id="btn__continue" class="btn btn--continue"
-                            onclick="updateModal('Thank You!','We hope you enjoy your jet2 holiday!')" alt="Continue Button">Continue</button>
+                            onclick="updateModal('Thank You!','We hope you enjoy your jet2 holiday!')"
+                            alt="Continue Button">Continue</button>
                     </div>
 
                 </div>
@@ -51,34 +52,96 @@
     </main>
 
     <script>
+        //Used Babel to convert the ES6 script to work with IE9 and Safari7.1, and also had to modify classList as IE9 also doesnt support it. 
+        "use strict";
 
-        class Modal {
-            constructor(overlay) {
-                this.overlay = overlay;
-                const cancelButton = overlay.querySelector('.btn--cancel')
-                cancelButton.addEventListener('click', this.close.bind(this));
-            }
-            open(header, content) {
-                this.overlay.classList.remove('is-hidden');
-                this.overlay.querySelector('#modal__header-text').innerHTML = header;
-                this.overlay.querySelector('#modal__content').innerHTML = content;
-                var elem = document.querySelector('#btn__continue');
-                elem.style.display = 'inline-block';
-            }
-            update(header, content) {
-                this.overlay.classList.remove('is-hidden');
-                this.overlay.querySelector('#modal__header-text').innerHTML = header;
-                this.overlay.querySelector('#modal__content').innerHTML = content;
-                var elem = document.querySelector('#btn__continue');
-                elem.style.display = 'none';
-            }
-            close() {
-                this.overlay.classList.add('is-hidden');
-            }
-        }
-        const modal = new Modal(document.querySelector('.modal-overlay'));
+        function _instanceof(left, right) { if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) { return right[Symbol.hasInstance](left); } else { return left instanceof right; } }
+
+        function _classCallCheck(instance, Constructor) { if (!_instanceof(instance, Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+        function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+        function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+        var Modal =
+            /*#__PURE__*/
+            function () {
+                function Modal(overlay) {
+                    _classCallCheck(this, Modal);
+
+                    this.overlay = overlay;
+                    var cancelButton = overlay.querySelector('.btn--cancel');
+                    cancelButton.addEventListener('click', this.close.bind(this));
+                }
+
+                _createClass(Modal, [{
+                    key: "open",
+                    value: function open(header, content) {
+                        this.overlay.className = this.overlay.className.replace(/\bis-hidden\b/g, "");
+                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
+                        this.overlay.querySelector('#modal__content').innerHTML = content;
+                        var elem = document.querySelector('#btn__continue');
+                        elem.style.display = 'inline-block';
+                    }
+                }, {
+                    key: "update",
+                    value: function update(header, content) {
+                        this.overlay.className = this.overlay.className.replace(/\bis-hidden\b/g, "");
+                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
+                        this.overlay.querySelector('#modal__content').innerHTML = content;
+                        var elem = document.querySelector('#btn__continue');
+                        elem.style.display = 'none';
+                    }
+                }, {
+                    key: "close",
+                    value: function close() {
+                        var x, name, arr;
+                        name = "is-hidden";
+                        arr = this.overlay.className.split(" ");
+                        if (arr.indexOf(name) == -1) {
+                            this.overlay.className += " " + name;
+                        }
+                    }
+                }]);
+
+                return Modal;
+            }();
+
+        var modal = new Modal(document.querySelector('.modal-overlay'));
         window.openModal = modal.open.bind(modal);
         window.updateModal = modal.update.bind(modal);
+
+
+
+        //Original ES6 version of the above. Works in Chrome, Firefox, Edge, iOS Safari.
+
+        /*         class Modal {
+                    constructor(overlay) {
+                        this.overlay = overlay;
+                        const cancelButton = overlay.querySelector('.btn--cancel')
+                        cancelButton.addEventListener('click', this.close.bind(this));
+                    }
+                    open(header, content) {
+                        this.overlay.classList.remove('is-hidden');
+                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
+                        this.overlay.querySelector('#modal__content').innerHTML = content;
+                        var elem = document.querySelector('#btn__continue');
+                        elem.style.display = 'inline-block';
+                    }
+                    update(header, content) {
+                        this.overlay.classList.remove('is-hidden');
+                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
+                        this.overlay.querySelector('#modal__content').innerHTML = content;
+                        var elem = document.querySelector('#btn__continue');
+                        elem.style.display = 'none';
+                    }
+                    close() {
+                        this.overlay.classList.add('is-hidden');
+                    }
+                }
+                const modal = new Modal(document.querySelector('.modal-overlay'));
+                window.openModal = modal.open.bind(modal);
+                window.updateModal = modal.update.bind(modal); */
 
     </script>
 
