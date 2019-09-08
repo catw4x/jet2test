@@ -4,4 +4,6 @@ I created a simple HTML page with some javascript to open and close a modal. I a
 
 I set up the modal to be empty so that it can be re-used with different messages being passed in.
 
-I really enjoyed this test. I am fairly new to SASS but I love the functionality it gives you. I dont think I will ever go back to plain CSS now! 
+I have used BEM naming convention for the css classes to make the code and structure easier to understand.
+
+I really enjoyed this test. I am fairly new to SASS but I love the functionality it gives you. 
