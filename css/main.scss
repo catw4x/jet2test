@@ -1,27 +1,51 @@
 
-//Set up colours here so if any changes are needed we only have to do it in one place. 
+//*Set up colours here so if any changes are needed we only have to do it in one place. 
 
 $colors: (
-    primary: #ee3123,
-    accent: #FFFF00,
-    lightblue: #347cf2,
+    primary: #3d8ede,
+    accent: #fdb900,
+    accentdark: #ca9400,
+    lightblue: #00B3E6,
+    midblue: #396CAD,
     darkblue: #203240,
     green: #009401,
-    darkgrey: #637079
+    darkgrey: #637079,
+    lightgrey: #f5f5f5,
+    white: #ffffff
+
+/*     primary: #B1000E,
+    accent: #FD0014,
+    lightblue: #00B3E6,
+    darkblue: #007393,
+    green: #009401,
+    darkgrey: #333,
+    lightgrey: #f5f5f5,
+    white: #ffffff */
+
 );
 
 $padding: 10px;
 
-//Import fontawesome icons as we can colour and size svg where needed and improve performance over normal images.
+$logo: url('/images/Jet2Holidays Logo.png');
+
+//$logo: url('/images/hitachiLogo.jpg');
+
+$fontfamily: "Franklin Gothic Heavy Italic", Arial, sans-serif;
+$fontfamily2: "Franklin Gothic Demi", Arial, sans-serif;
+$fontfamily3: "Open Sans Regular", Arial, sans-serif;
+
+//*Import fontawesome icons as we can colour and size svg where needed and improve performance over normal images.
 
 @import "scss/fontawesome.scss";
 @import "scss/solid.scss";
+
+//*Function to access colour scheme.
 
 @function color($color-name) {
     @return map-get($colors, $color-name)
 };
 
-//Import Franklin Gothic fonts to use in buttons and headers.
+//*Import fonts to use in buttons and headers.
 
 @font-face {
     font-family: 'Franklin Gothic Demi';
@@ -33,7 +57,13 @@ $padding: 10px;
     src: url('fonts/FranklinGothic-HeavyItalic.woff') format('woff');
 };
 
-//Set responsive trigger to change page layout from mobile to desktop.
+@font-face {
+    font-family: 'Open Sans Regular';
+    src: url('fonts/OpenSans-Regular.woff') format('woff');
+};
+
+//*Set responsive trigger to change page layout from mobile to desktop.
+
 $desktop: 840px;
 
 @mixin desktop {
@@ -47,46 +77,156 @@ body, html {
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;  
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    background-color: #fff;
+    font-family: Open Sans,sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    font-size: .875rem;
+    color: #444;
+    letter-spacing: -.01em;
 
     .is-hidden {
         display: none;
       }
-     
-    header {
-        background-color: #fff;
-        @include desktop {
-            padding: 16px 0;
-        }
+
+    .container {
+        position: relative;
+        box-sizing: border-box;
     }
 
+    .hub {
+        position: relative;
+        background-color: #f5f5f5;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        transition: -webkit-transform .3s;
+        transition: transform .3s;
+        transition: transform .3s,-webkit-transform .3s;
+    }
+
+    .hub-container {
+        overflow: hidden;
+        margin: 0 auto;
+        max-width: 1400px;
+    }
+
+    .hub-nav-menu {
+        margin: 0;
+        list-style: none;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .hub-nav-menu__item {
+        position: relative;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+    }
+      
+    .hub-nav-menu__link:focus, .hub-nav-menu__link:hover {
+        background-color: #ccc;
+        color: #444;
+    }
+
+    .hub-nav-menu__item--active {
+        pointer-events: none;
+    }
+
+    .hub-nav-menu__item--active:before {
+        border-bottom: 2px solid color(primary);
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    .hub-nav-menu__link {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        color: #757575;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0;
+        height: 40px;
+        vertical-align: middle;
+        padding: 0 12px;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    header {
+        background-color: #fff;
+        padding: 0;
+
+        .logo-container {
+            padding: 16px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .logo {
+            background-image: $logo;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: auto;
+            width: 200px;
+            height: 50px;
+            background-size: 200px;
+            @include desktop {
+                width: 360px;
+                height: 91px;
+                background-size: 360px;
+            }
+        }
+    }
+    
     header a {
  
         text-decoration: none;
         display: block;
-        text-transform: uppercase;
         text-align: center;
         display: block;
         margin: 0 auto;
-        padding: 12px 0;
+        padding: 0;
 
         @include desktop {
             height: 100px;
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
-            padding: 0 1.6%;
         }
 
-        .logo {
-            width: 200px;
-            @include desktop {
-                width: 360px;
-                height: 91px;
-            }
-        }
 
+
+    }
+
+    .nav-bar {
+        background-color: color(primary);
+        width: 100%;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        height: 50px;
     }
 
     .modal-overlay {
@@ -95,12 +235,14 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background: #637079;
+        background: color(darkgrey);
         z-index: 9999;
         -webkit-animation-name: example; 
         -webkit-animation-duration: 0.5s; 
         animation-name: example;
         animation-duration: 0.5s;
+        flex-direction: column;
+
 
         @-webkit-keyframes example {
             0%   {opacity: 0;}
@@ -118,18 +260,17 @@ body {
         position: absolute;
         bottom: 0;
         margin: auto;
-        background: #f5f5f5;
+        background: color(lightgrey);
         z-index: 9999;
         overflow: auto;
         width: 100%;
 
         @include desktop {
-            margin: auto;
             position: relative;
-            top: 30%;
             width: 700px;
             max-width: 700px;
             min-height: 300px;
+
         }
 
         .modal__header {
@@ -150,7 +291,7 @@ body {
 
             .modal__header-text {
                 margin-left: 36px;
-                font-family: "Franklin Gothic Demi", Arial, sans-serif;
+                font-family: $fontfamily2;
                 font-style: normal;
             }
         }
@@ -181,34 +322,24 @@ body {
     }
     
     .btn {
-        border: 2px solid;
-        cursor: pointer;
-        display: inline-block;
+        border: none;
+        display: block;
         padding: 10px;
         border-radius: 5px;
-        font-size: 14px;
+        font-family: $fontfamily;
+        font-size: 22px;
         font-weight: 500;
         text-align: center;
         text-decoration: none;
+        width: 100%;
+        height: 50px;
         position: relative;
+        letter-spacing: -0.6px;
+        line-height: 20px;
         background-color: transparent;
         outline: 0;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .btn--light-blue {
-        padding: 5px 0;
-        background: color(lightblue);
-        color: #fff;
-        text-decoration: none;
-        display: block;
-        height: 60px;
-        font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
-        font-size: 22px;
-        letter-spacing: -0.6px;
         cursor: pointer;
-        width: 100%;
-        line-height: 20px;
+        -webkit-font-smoothing: antialiased;
 
         @include desktop {
             display: inline-block;
@@ -216,45 +347,56 @@ body {
         }
     }
 
-    .btn--cancel {
+    .btn--primary {
+        background: color(primary);
+        color: #fff;
+    }
+
+    .btn--primary:hover {
+        opacity: 0.95;
+    }
+
+    .btn--accent {
+        background: color(accent);
+        color: color(darkblue);
+        border-bottom: 4px solid color(accentdark);
+    }
+
+    .btn--light-blue {
+        background: color(lightblue);
+        color: #fff;
+    }
+
+    .btn-modal {
         display: inline-block;
-        width: 100%;
-        height: 50px;
-        cursor: pointer;
-        font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
-        font-size: 22px;
-        border: 2px solid color(darkgrey);
-        color: color(darkgrey);
         margin-top: 10px;
-        letter-spacing: -0.6px;
 
         @include desktop {
             width: 250px;
         }
     }
 
-    .btn--continue {
-        display: inline-block;
-        width: 100%;
-        height: 50px;
-        cursor: pointer;
-        font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
-        font-size: 22px;
-        border: 2px solid color(darkblue);
+    .btn-modal--cancel {
+        border: 2px solid color(darkgrey);
+        color: color(darkgrey);
+    }
+
+    .btn-modal--continue {
         background: color(darkblue);
+        border: 2px solid color(darkblue);
         color: #fff;
-        margin-top: 10px;
-        letter-spacing: -0.6px;
-
-        @include desktop {
-            width: 250px;
-        }
-
     }
 
     section#primary {
-        padding: $padding;
+        padding: 20px;
         text-align: center;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include desktop {
+            height: 300px;
+        }
         
         h1 {
             font-family: "Franklin Gothic Heavy Italic", Arial, sans-serif;
@@ -264,6 +406,9 @@ body {
             -webkit-font-smoothing: antialiased;
             font-weight: 500;
             outline: 0;
+            @include desktop {
+                font-size: 48px;
+            }
         }
     }
 }

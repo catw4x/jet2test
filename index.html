@@ -7,14 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Jet2 Tech Test</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 </head>
 
 <body>
 
     <header>
-        <a>
-            <img src="images\Jet2Holidays Logo.png" class="logo" alt="Logo" />
-        </a>
+        <div id="hub" class="hub">
+            <nav class="hub-container container">
+                <ul class="hub-nav-menu">
+                    <li class="hub-nav-menu__item hub-nav-menu__item--active">
+                        <a class="hub-nav-menu__link">Tech Test</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div id="logo-container" class="logo-container container">
+            <div id="logo" class="logo" alt="Logo"></div>
+        </div>
     </header>
 
     <main>
@@ -22,126 +32,110 @@
             <h1>
                 Tech Test
             </h1>
-            <button class="btn btn--light-blue" alt="Confirmation Button"
-                onclick="openModal('Congratulations your jet2 holiday booking has been confirmed',
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis dolore ratione perferendis ipsam, exercitationem beatae, nemo, voluptates veritatis consequuntur molestiae fugit aliquid mollitia a blanditiis numquam possimus in atque cumque.')">
+            <button id="btn_confirm" class="btn btn--primary" alt="Confirmation Button"
+                onclick="openModal('Congratulations your Jet2 holiday booking has been confirmed', 'You can manage your booking from the homepage and add any essentials you may need for your trip.')">
                 Confirm your booking!
             </button>
 
-            <!-- Create Modal and hide it until needed. Give ability to re-use modal by using javascript to pass header text and content as arguments. -->
-            <div class="is-hidden modal-overlay">
+            <!-- Modal defined here. Hide it until needed. Give ability to re-use modal by using javascript to pass header text and content as arguments. -->
+            <div id="modal_overlay" class="modal-overlay is-hidden">
 
-                <div id="modal__test" class="modal">
+                <div id="modal_test" class="modal">
 
-                    <div class="modal__header">
-                        <div class="modal__header-icon fas fa-check-circle" alt="Confirmation Icon"></div>
-                        <div id="modal__header-text" class="modal__header-text"></div>
+                    <div id="modal_header" class="modal__header">
+                        <div id="modal_header_icon" class="modal__header-icon fas fa-check-circle"
+                            alt="Confirmation Icon"></div>
+                        <div id="modal_header_text" class="modal__header-text"></div>
                     </div>
-                    <div id="modal__content" class="modal__content">
+                    <div id="modal_content" class="modal__content">
                     </div>
-                    <div class="modal__footer">
-                        <button class="btn btn--cancel" alt="Cancel Button">Cancel</button>
-                        <button id="btn__continue" class="btn btn--continue"
-                            onclick="updateModal('Thank You!','We hope you enjoy your jet2 holiday!')"
-                            alt="Continue Button">Continue</button>
+                    <div id="modal__footer" class="modal__footer">
+                        <button id="btn_cancel" class="btn btn-modal btn-modal--cancel" alt="Cancel Button">
+                            Cancel
+                        </button>
+                        <button id="btn_update" class="btn btn-modal btn-modal--continue"
+                            onclick="updateModal('Thank You!','We hope you enjoy your Jet2 holiday!')"
+                            alt="Continue Button">
+                            Continue
+                        </button>
                     </div>
 
                 </div>
             </div>
+            <!-- End of Modal-->
+
         </section>
     </main>
 
     <script>
-        //Used Babel to convert the ES6 script to work with IE9 and Safari7.1, and also had to modify classList as IE9 also doesnt support it. 
-        "use strict";
 
-        function _instanceof(left, right) { if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) { return right[Symbol.hasInstance](left); } else { return left instanceof right; } }
+        // Works in Chrome, Firefox, Edge, iOS Safari and IE11+
 
-        function _classCallCheck(instance, Constructor) { if (!_instanceof(instance, Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+        // Get the modal
+        var modal = document.getElementById("modal_overlay");
 
-        function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+        // Get the button element that closes the modal
+        var btn_close = document.getElementById("btn_cancel");
 
-        function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+        // When the user clicks on the confirmation button, open the modal
+        function openModal(headerText, content) {
+            document.getElementById('modal_header_text').innerHTML = headerText;
+            document.getElementById('modal_content').innerHTML = content;
+            modal.style.display = "flex";
+        }
 
-        var Modal =
-            /*#__PURE__*/
-            function () {
-                function Modal(overlay) {
-                    _classCallCheck(this, Modal);
+        // When the user clicks on the continue button, update the modal and hide continue button
+        function updateModal(headerText, content) {
+            document.getElementById('modal_header_text').innerHTML = headerText;
+            document.getElementById('modal_content').innerHTML = content;
+            btn_update.style.display = 'none';
+            modal.style.display = "flex";
+        }
 
-                    this.overlay = overlay;
-                    var cancelButton = overlay.querySelector('.btn--cancel');
-                    cancelButton.addEventListener('click', this.close.bind(this));
-                }
+        // When the user clicks on close button, close the modal
+        btn_close.onclick = function () {
+            modal.style.display = "none";
+            btn_update.style.display = 'inline-block';
+        }
 
-                _createClass(Modal, [{
-                    key: "open",
-                    value: function open(header, content) {
-                        this.overlay.className = this.overlay.className.replace(/\bis-hidden\b/g, "");
-                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
-                        this.overlay.querySelector('#modal__content').innerHTML = content;
-                        var elem = document.querySelector('#btn__continue');
-                        elem.style.display = 'inline-block';
-                    }
-                }, {
-                    key: "update",
-                    value: function update(header, content) {
-                        this.overlay.className = this.overlay.className.replace(/\bis-hidden\b/g, "");
-                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
-                        this.overlay.querySelector('#modal__content').innerHTML = content;
-                        var elem = document.querySelector('#btn__continue');
-                        elem.style.display = 'none';
-                    }
-                }, {
-                    key: "close",
-                    value: function close() {
-                        var x, name, arr;
-                        name = "is-hidden";
-                        arr = this.overlay.className.split(" ");
-                        if (arr.indexOf(name) == -1) {
-                            this.overlay.className += " " + name;
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                btn_update.style.display = 'inline-block';
+            }
+        }
+
+
+        // ES6. Works in Chrome, Firefox, Edge, iOS Safari. Does not work in IE11 and below
+
+        /*                 class Modal {
+                            constructor(overlay) {
+                                this.overlay = overlay;
+                                const cancelButton = overlay.querySelector('.btn-modal--cancel')
+                                cancelButton.addEventListener('click', this.close.bind(this));
+                            }
+                            open(header, content) {
+                                this.overlay.classList.remove('is-hidden');
+                                this.overlay.querySelector('#modal_header_text').innerHTML = header;
+                                this.overlay.querySelector('#modal_content').innerHTML = content;
+                                var elem = document.querySelector('#btn_update');
+                                elem.style.display = 'inline-block';
+                            }
+                            update(header, content) {
+                                this.overlay.classList.remove('is-hidden');
+                                this.overlay.querySelector('#modal_header_text').innerHTML = header;
+                                this.overlay.querySelector('#modal_content').innerHTML = content;
+                                var elem = document.querySelector('#btn_update');
+                                elem.style.display = 'none';
+                            }
+                            close() {
+                                this.overlay.classList.add('is-hidden');
+                            }
                         }
-                    }
-                }]);
-
-                return Modal;
-            }();
-
-        var modal = new Modal(document.querySelector('.modal-overlay'));
-        window.openModal = modal.open.bind(modal);
-        window.updateModal = modal.update.bind(modal);
-
-
-
-        //Original ES6 version of the above. Works in Chrome, Firefox, Edge, iOS Safari.
-
-        /*         class Modal {
-                    constructor(overlay) {
-                        this.overlay = overlay;
-                        const cancelButton = overlay.querySelector('.btn--cancel')
-                        cancelButton.addEventListener('click', this.close.bind(this));
-                    }
-                    open(header, content) {
-                        this.overlay.classList.remove('is-hidden');
-                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
-                        this.overlay.querySelector('#modal__content').innerHTML = content;
-                        var elem = document.querySelector('#btn__continue');
-                        elem.style.display = 'inline-block';
-                    }
-                    update(header, content) {
-                        this.overlay.classList.remove('is-hidden');
-                        this.overlay.querySelector('#modal__header-text').innerHTML = header;
-                        this.overlay.querySelector('#modal__content').innerHTML = content;
-                        var elem = document.querySelector('#btn__continue');
-                        elem.style.display = 'none';
-                    }
-                    close() {
-                        this.overlay.classList.add('is-hidden');
-                    }
-                }
-                const modal = new Modal(document.querySelector('.modal-overlay'));
-                window.openModal = modal.open.bind(modal);
-                window.updateModal = modal.update.bind(modal); */
+                        const modal = new Modal(document.querySelector('.modal-overlay'));
+                        window.openModal = modal.open.bind(modal);
+                        window.updateModal = modal.update.bind(modal);  */
 
     </script>
 
