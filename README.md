@@ -6,4 +6,4 @@ I set up the modal to be empty so that it can be re-used with different messages
 
 I have used BEM naming convention for the css classes to make the code and structure easier to understand.
 
-I really enjoyed this test. I am fairly new to SASS but I love the functionality it gives you. 
+I really enjoyed this test. 
